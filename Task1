@@ -5,8 +5,8 @@ import twilio.rest
 
 filename = "data.csv"
 rows = [] 
-account_sid = 'ACf642d4aceefc14f7158267eecc2e05ea'
-auth_token = '12786646d0f7d09505c0a577b04006bf'
+account_sid = 'xxxxxxxxxxxxxxxxxxx'
+auth_token = 'xxxxxxxxxxxxxxxxx'
 client = Client(account_sid, auth_token)
 list_of_all_county_codes=['93','91','1','44']
 with open(filename, 'r') as csvfile:  
