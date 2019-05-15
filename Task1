@@ -9,11 +9,6 @@ account_sid = 'ACf642d4aceefc14f7158267eecc2e05ea'
 auth_token = '12786646d0f7d09505c0a577b04006bf'
 client = Client(account_sid, auth_token)
 list_of_all_county_codes=['93','91','1','44']
-class MessageAlreadySent(Exception):
-    def __init__(self,message):
-        self.message=message
-    def print_message(self):
-        print(self.message)
 with open(filename, 'r') as csvfile:  
     csvreader = csv.reader(csvfile)  
     for row in csvreader: 
@@ -28,9 +23,7 @@ with open(filename, 'r') as csvfile:
             print('empty row discarding it')
         else: 
             try:
-                if number in sent_numbers:
-                    raise MessageAlreadySent('Message has already been sent to this number')
-                else:
+                if not  number in sent_numbers:
                     message = client.messages \
                         .create(
                             body=row[1],
@@ -38,9 +31,6 @@ with open(filename, 'r') as csvfile:
                             to='+'+country_code+number)
                     #print(f" message is {message}")
                     sent_numbers.append(number)
-            except MessageAlreadySent as e:
-                e.print_message()
-                continue
             except Exception as e:
                 print(f"Error hitting Twilio API for {number}: "+str(e))
                 continue
